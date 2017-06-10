@@ -7,17 +7,17 @@ API Document: http://api.visioninternet.com/Document
 
 Install: (In Development)
 ```
-# npm install visionLiveSDK
+# npm install https://github.com/VisionInternet/visionLiveSDK-Nodejs
 ```
 
 Uninstall: (In Development)
 ```
-# npm uninstall visionLiveSDK
+# npm uninstall https://github.com/VisionInternet/visionLiveSDK-Nodejs
 ```
 
 Nodejs Example
 ```
-var vsisionLiveAPIClient = require("./visionLiveSDK/visionLiveSDKAPIClient");
+var vsisionLiveAPIClient = require("visionlivesdk");
 
 var apiClient = new vsisionLiveAPIClient({
     serverUrl:"http://www.city.gov/API",
