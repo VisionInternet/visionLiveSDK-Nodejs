@@ -1,0 +1,31 @@
+{
+  "author": "Yuliang Ding <yding@visioninternet.com> (http://www.visioninternet.com)",
+  "name": "visionlivesdk",
+  "description": "visionLive API Node SDK",
+  "version": "2017.2.605",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/VisionInternet/visionLiveSDK-Nodejs.git"
+  },
+  "main": "visionLiveSDK/visionLiveSDKAPIClient.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/VisionInternet/visionLiveSDK-Nodejs/issues"
+  },
+  "homepage": "https://github.com/VisionInternet/visionLiveSDK-Nodejs#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "visioninternet",
+    "visionLive",
+    "CMS",
+    "nodejs"
+  ],
+  "license": "GPL-3.0"
+}
