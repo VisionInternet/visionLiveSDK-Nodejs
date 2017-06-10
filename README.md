@@ -5,12 +5,12 @@ API Explorer: http://api.visioninternet.com/
 
 API Document: http://api.visioninternet.com/Document
 
-Install: (In Development)
+Install:
 ```
 # npm install https://github.com/VisionInternet/visionLiveSDK-Nodejs
 ```
 
-Uninstall: (In Development)
+Uninstall:
 ```
 # npm uninstall https://github.com/VisionInternet/visionLiveSDK-Nodejs
 ```
