@@ -25,7 +25,9 @@ var apiClient = new vsisionLiveAPIClient({
     app_secret:"{Your App Secret}"
 });
 var apiService = apiClient.getService();
-// vision.cms.calendarcomponent.event.get is the method name
+
+// vision.cms.calendarcomponent.event.get is the method name.
+// apiService.vision.cms.calendarcomponent.event.get will return a promise.
 apiService.vision.cms.calendarcomponent.event.get({Fields:1, ID:3754})
             .then(function (response) {
                 if(response.ErrorCode){
