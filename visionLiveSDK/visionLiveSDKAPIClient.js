@@ -4,13 +4,26 @@ var request = require('request');
 var rp = require('request-promise');
 var queryString = require('querystring');
 
-API_NAME_PREFIX = "vision";
-PARAM_METHOD_KEY = "_method";
-PARAM_APP_KEY_KEY = "_app_key";
-PARAM_FORMAT_KEY = "_format";
-PARAM_TIMESTAMP_KEY = "_timestamp";
-PARAM_VERSION_KEY = "_v";
-PARAM_SIGN_KEY = "_sign";
+var vsisionLiveDefault = {
+    API_NAME_PREFIX : "vision",
+    PARAM_METHOD_KEY : "_method",
+    PARAM_APP_KEY_KEY : "_app_key",
+    PARAM_FORMAT_KEY : "_format",
+    PARAM_TIMESTAMP_KEY : "_timestamp",
+    PARAM_VERSION_KEY : "_v",
+    PARAM_SIGN_KEY : "_sign",
+    recursiveHandler :  {
+            get:function(target, name){
+                var next = target();
+                next.next(name)
+                return new Proxy(function(){return next;}, vsisionLiveDefault.recursiveHandler);
+            },
+            apply:function(target, thisObj, argList){
+                var targetObj = target();
+                return targetObj.execute(argList);
+            }
+    }
+}
 
 var vsisionLiveAPIClient = module.exports = function(options){
     this.API_VERSION = '1.0'
@@ -35,13 +48,13 @@ vsisionLiveAPIClient.prototype = {
             }
         }
         
-        params[PARAM_METHOD_KEY] = methodName;
-        params[PARAM_VERSION_KEY] = this.API_VERSION;
-        params[PARAM_APP_KEY_KEY] = this.app_key;
-        params[PARAM_FORMAT_KEY] = this.FORMAT;
-        params[PARAM_TIMESTAMP_KEY] = this._getTimeStamp();
+        params[vsisionLiveDefault.PARAM_METHOD_KEY] = methodName;
+        params[vsisionLiveDefault.PARAM_VERSION_KEY] = this.API_VERSION;
+        params[vsisionLiveDefault.PARAM_APP_KEY_KEY] = this.app_key;
+        params[vsisionLiveDefault.PARAM_FORMAT_KEY] = this.FORMAT;
+        params[vsisionLiveDefault.PARAM_TIMESTAMP_KEY] = this._getTimeStamp();
         
-        params[PARAM_SIGN_KEY] = this._sign(params);
+        params[vsisionLiveDefault.PARAM_SIGN_KEY] = this._sign(params);
 
         return params
     },
@@ -99,7 +112,7 @@ vsisionLiveAPIClient.prototype = {
                     }
                 };
             }, 
-            recursiveHandler)
+            vsisionLiveDefault.recursiveHandler)
     },
     execute : function(methodName, args){        
         var params = this._generateParams(methodName, args)
@@ -111,15 +124,3 @@ vsisionLiveAPIClient.prototype = {
         });
     }
 }
-
-var recursiveHandler =  {
-        get:function(target, name){
-            var next = target();
-            next.next(name)
-            return new Proxy(function(){return next;}, recursiveHandler);
-        },
-        apply:function(target, thisObj, argList){
-            var targetObj = target();
-            return targetObj.execute(argList);
-        }
-};
